@@ -1,5 +1,7 @@
 from models.table import Table
-# importar repository interface
+from repositories.interface_repository import InterfaceRepository
 
-class TableRepository(Interfacereporitoy[Table]):
+
+class TableRepository(InterfaceRepository[Table]):
     pass
+

@@ -4,9 +4,11 @@ from repositories.table_repository import TableRepository
 class TableController:
     # constructor
     def __init__(self):
-
-
+        """
+        Constructor of the class
+        """
         print("Table controller ready")
+        self.table_repository = TableRepository
 
 
     def index(self) -> list:
@@ -15,8 +17,7 @@ class TableController:
         :return:
         """
         print("Get all")
-
-    return self.table_repository.find_all()
+        return self.table_repository.find_all()
 
     def show(self, id_: str) -> dict:
         """
@@ -26,7 +27,6 @@ class TableController:
         """
         print("Get by id")
         return self.table_repository.find_by_id(id_)
-
 
     def create(self, table_: dict) -> dict:
         """
@@ -38,8 +38,6 @@ class TableController:
         table = Table(table_)
         return self.table_repository.save(table)
 
-
-
     def update(self, id_: str, table_: dict) -> dict:
         """
 
@@ -48,7 +46,6 @@ class TableController:
         :return:
         """
         print("Update")
-
         table = Table(table_)
         return self.table_repository.update(id_, table)
 
