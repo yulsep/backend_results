@@ -36,7 +36,14 @@ class InterfaceRepository(Generic[T]):
 
         :return:
         """
-        pass
+        current_collection = self.data_base[self.collection]
+        dataset = []
+        for document in current_collection.find():
+            document['_id'] = document['_id'].__str__()
+            document = self.transform_object_ids(document)
+            document = self.get_values_db_ref(document)
+            dataset.append(document)
+        return dataset
 
     def fin_by_id(self, id_: str) -> dict:
         """
@@ -44,7 +51,17 @@ class InterfaceRepository(Generic[T]):
         :param id_:
         :return:
         """
-        pass
+        current_collection = self.data_base[self.collection]
+        _id = ObjectId(id_)
+        # if _id is not there, document=none
+        document = current_collection.find_one({'_id': _id})
+        document = self.get_values_db_ref(document)
+        if not document:
+            document['_id'] = document['_id'].__str__()
+        else:
+            # document not found
+            document = {}
+        return document
 
     def save(self, item: T) -> T:
         """
@@ -52,7 +69,21 @@ class InterfaceRepository(Generic[T]):
         :param item:
         :return:
         """
-        pass
+        current_collection = self.data_base[self.collection]
+        item = self.transform_refs(item)
+        if hasattr(item, '_id') and item._id !="":
+            #update
+            id_ = item._id
+            _id = ObjectId(id_)
+            delattr(item, '_id')
+            item = item.__dict__
+            update_item = {"$set": item}
+            current_collection.update_one({'_id': _id}, update_item)
+        else:
+            #insert
+            _id = current_collection.insert_one(item.__dict__)
+            id_ = _id.inserted_id.__str__()
+        return self.find_by_id(id_)
 
     def update(self, id_: str, item: T) -> dict:
         """
