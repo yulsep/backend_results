@@ -1,10 +1,8 @@
 {
   "url-backend": "127.0.0.1",
   "port": "8081",
-  "db-connect": "mongodb+srv://jony:<Jony12345>@registraduria.juia4lh.mongodb.net/?retryWrites=true&w=majority",
-  "db-name": "registraduria"
-
+  "db-connection": "mongodb+srv://yuliana:ipxr0s9g3QPPMJSD@mintic4.ktjkavc.mongodb.net/results_db?retryWrites=true&w=majority",
+  "db-name": "results_db"
 }
-
 
 
