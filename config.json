@@ -4,5 +4,3 @@
   "db-connection": "mongodb+srv://yuliana:ipxr0s9g3QPPMJSD@mintic4.ktjkavc.mongodb.net/results_db?retryWrites=true&w=majority",
   "db-name": "results_db"
 }
-
-
