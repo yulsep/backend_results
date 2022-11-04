@@ -1,5 +1,5 @@
 from models.table import Table
-
+from repositories.table_repository import TableRepository
 
 class TableController:
     # constructor
@@ -15,27 +15,18 @@ class TableController:
         :return:
         """
         print("Get all")
-        data ={
-            "id": 1,
-            "name": "Mesa 1",
-            "description": "Mesa 1",
-            "status": "Activo"
-        }
-        table = Table(data)
+
+    return self.table_repository.find_all()
 
     def show(self, id_: str) -> dict:
         """
+
         :param id_:
         :return:
         """
-        print("Show by id")
-        data ={
-            "_id": id_,
-            "name": "Mesa 1",
-            "description": "Mesa 1",
-            "status": "Activo"
-        }
-        table = Table(data)
+        print("Get by id")
+        return self.table_repository.find_by_id(id_)
+
 
     def create(self, table_: dict) -> dict:
         """
@@ -43,9 +34,9 @@ class TableController:
         :param table_:
         :return:
         """
-        print("Insert")
+        print("Create")
         table = Table(table_)
-        return table.__dict__
+        return self.table_repository.save(table)
 
 
 
@@ -57,10 +48,9 @@ class TableController:
         :return:
         """
         print("Update")
-        data = table_
-        data["_id"] = id_
+
         table = Table(table_)
-        return table.__dict__
+        return self.table_repository.update(id_, table)
 
     def delete(self, id_: str) -> str:
         """
@@ -69,4 +59,4 @@ class TableController:
         :return:
         """
         print("Delete" + id_)
-        return ("Delete count: " + id_)
+        return self.table_repository.delete(id_)
