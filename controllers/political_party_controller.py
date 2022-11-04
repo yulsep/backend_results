@@ -1,4 +1,5 @@
 from models.political_party import PoliticalParty
+from repositories.political_party_repository import PoliticalPartyRepository
 
 
 class PoliticalPartyController:
@@ -8,23 +9,16 @@ class PoliticalPartyController:
         Constructor of the class
         """
         print("Political party controller ready")
+        self.political_party_repository = PoliticalPartyRepository
 
-    # get All political parties
     def index(self) -> list:
         """
         This method gets all political parties into the DB
         :return: political parties list
         """
         print("Get all")
-        # Test code with data burned
-        data = {
-            "_id": "abc123",
-            "name": "Henry",
-            "lastname": "Escobar",
-            "personal_id": "98580"
-        }
+        return self.political_party_repository.find_all()
 
-    # get ONE political party
     def show(self, id_: str) -> dict:
         """
         This method get a political party by id
@@ -41,9 +35,8 @@ class PoliticalPartyController:
         :return: political party´s dictionary
         """
         print("Insert")
-        # Test code with data burned
         political_party = PoliticalParty(political_party_)
-        return political_party.__dict__
+        return self.political_party_repository.save(political_party)
 
     # UPDATE political party
     def update(self, id_: str, political_party_: dict) -> dict:
@@ -53,12 +46,9 @@ class PoliticalPartyController:
         :param political_party_:
         :return: political party´s dictionary
         """
-        # Test code with data burned
         print("Update")
-        data = political_party_
-        data['_id'] = id_
-        political_party_ = PoliticalParty(political_party_)
-        return political_party_.__dict__
+        political_party = PoliticalParty(political_party_)
+        return self.political_party_repository.update(id_, political_party)
 
     # DELETE one political party
     def delete(self, id_: str) -> str:
@@ -68,6 +58,6 @@ class PoliticalPartyController:
         :return: Nothing
         """
         print("Delete" + id_)
-        # Test code with data burned
-        return {"Delete count": 1}
+        return self.political_party_repository.delete(id_)
+
 

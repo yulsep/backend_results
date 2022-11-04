@@ -1,4 +1,4 @@
-
+from flask import Blueprint, jsonify
 from flask import request
 
 from controllers.table_controller import TableController
@@ -8,7 +8,7 @@ table_controller = TableController()
 
 
 @table_blueprints.route('/table/all', methods=['GET'])
-def get_all():
+def get_all_tables():
     """
     This method get a table list
     :return:
@@ -18,8 +18,7 @@ def get_all():
 
 
 @table_blueprints.route('/table/<string:id_>', methods=['GET'])
-
-def get_by_id(id_: str):
+def get_table_by_id(id_: str):
     """
     :param id_:
     :return:
@@ -29,7 +28,7 @@ def get_by_id(id_: str):
 
 
 @table_blueprints.route('/table/save', methods=['POST'])
-def table_save():
+def table_insert():
     """
     :return:
     """
@@ -38,9 +37,7 @@ def table_save():
     return jsonify(response), 201
 
 
-
 @table_blueprints.route('/table/update/<string:id_>', methods=['PATH'])
-
 def table_update(id_: str):
     """
     :param id_:
@@ -51,9 +48,7 @@ def table_update(id_: str):
     return jsonify(response), 201
 
 
-
 @table_blueprints.route('/table/delete/<string:id_>', methods=['DELETE'])
-
 def table_delete(id_: str):
     """
     :param id_:
