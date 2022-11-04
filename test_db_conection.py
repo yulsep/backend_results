@@ -15,3 +15,6 @@ print(data_base.list_collection_names())
 
 candidate = data_base.get_collection('candidate')
 all_candidate = candidate.find({})
+
+political_party = data_base.get_collection('political_party')
+all_political_parties = political_party.find('political_parties')
