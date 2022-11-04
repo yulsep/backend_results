@@ -15,9 +15,9 @@ class PoliticalPartyController:
 
     def show(self, id_: str) -> dict:
         """
-
+        This method get a political party by id
         :param id_:
-        :return:
+        :return:political party
         """
         print("Show by id")
 
