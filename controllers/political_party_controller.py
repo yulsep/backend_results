@@ -40,8 +40,8 @@ class PoliticalPartyController:
 
     def delete(self, id_: str) -> str:
         """
-
+        This Method  delete a Political Party by ID
         :param id_:
-        :return:
+        :return: Nothing
         """
         print("Delete")
