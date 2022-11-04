@@ -2,7 +2,7 @@ from models.candidates import Candidates
 
 
 class CandidateController:
-    #constructor
+    # constructor
     def __init__(self):
         print("Candidate controller ready")
 
