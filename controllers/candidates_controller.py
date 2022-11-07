@@ -6,7 +6,7 @@ class CandidateController:
     #constructor
     def __init__(self):
         print("Candidate controller ready")
-        self.candidates_repository = CandidatesRepository
+        self.candidates_repository = CandidatesRepository()
 
     def index(self) -> list:
         """

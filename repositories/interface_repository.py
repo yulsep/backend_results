@@ -1,6 +1,5 @@
-import json
-
 import certifi
+import json
 import pymongo
 from typing import Generic, TypeVar, get_args
 
@@ -18,7 +17,7 @@ class InterfaceRepository(Generic[T]):
         data_config = self.load_file_config()
         client = pymongo.MongoClient(
             data_config.get("db-connection"),
-            tslCAFile=ca
+            tlsCAFile=ca
         )
         self.data_base = client[data_config.get("db-name")]
         # get generic class name
@@ -37,7 +36,7 @@ class InterfaceRepository(Generic[T]):
     def find_all(self) -> list:
         current_collection = self.data_base[self.collection]
         dataset = []
-        for document in current_collection.find():
+        for document in current_collection.find({}):
             document['_id'] = document['_id'].__str__()
             document = self.transform_object_ids(document)
             document = self.get_values_db_ref(document)
@@ -50,7 +49,7 @@ class InterfaceRepository(Generic[T]):
         # if _id is not there, document=none
         document = current_collection.find_one({'_id': _id})
         document = self.get_values_db_ref(document)
-        if not document:
+        if document:
             document['_id'] = document['_id'].__str__()
         else:
             # document not found
