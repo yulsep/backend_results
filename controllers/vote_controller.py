@@ -6,7 +6,7 @@ class VoteController:
     # constructor
     def __init__(self):
         print("Vote controller ready")
-        self.vote_repository = VoteRepository
+        self.vote_repository = VoteRepository()
 
     def index(self) -> list:
         """

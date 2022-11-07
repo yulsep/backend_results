@@ -1,6 +1,7 @@
 from models.table import Table
 from repositories.table_repository import TableRepository
 
+
 class TableController:
     # constructor
     def __init__(self):
@@ -8,8 +9,7 @@ class TableController:
         Constructor of the class
         """
         print("Table controller ready")
-        self.table_repository = TableRepository
-
+        self.table_repository = TableRepository()
 
     def index(self) -> list:
         """

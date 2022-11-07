@@ -9,7 +9,7 @@ class PoliticalPartyController:
         Constructor of the class
         """
         print("Political party controller ready")
-        self.political_party_repository = PoliticalPartyRepository
+        self.political_party_repository = PoliticalPartyRepository()
 
     def index(self) -> list:
         """
@@ -26,6 +26,7 @@ class PoliticalPartyController:
         :return:political party
         """
         print("Show by id")
+        return self.political_party_repository.find_by_id(id_)
 
     # INSERT political party
     def create(self, political_party_: dict) -> dict:
