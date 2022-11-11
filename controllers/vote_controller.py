@@ -13,7 +13,6 @@ class VoteController:
         This method get a vote list
         :return:
         """
-        print("Get all")
         return self.vote_repository.find_all()
 
     def show(self, id_: str) -> dict:
@@ -22,7 +21,6 @@ class VoteController:
         :param id_:
         :return:
         """
-        print("Show by id")
         return self.vote_repository.find_by_id(id_)
 
     def create(self, vote_: dict) -> dict:
@@ -31,7 +29,6 @@ class VoteController:
         :param vote_:
         :return:
         """
-        print("Insert")
         vote = Vote(vote_)
         return self.vote_repository.save(vote)
 
@@ -42,7 +39,6 @@ class VoteController:
         :param vote_:
         :return:
         """
-        print("Update")
         vote = Vote(vote_)
         return self.vote_repository.update(id_, vote)
 
@@ -52,5 +48,4 @@ class VoteController:
         :param id_:
         :return:
         """
-        print("Delete")
         return self.vote_repository.delete(id_)

@@ -117,7 +117,7 @@ class InterfaceRepository(Generic[T]):
             if isinstance(value, DBRef):
                 collection_ref = self.data_base[value.collection]
                 _id = ObjectId(value.id)
-                document_ref = collection_ref.find({'_id': _id})
+                document_ref = collection_ref.find_one({'_id': _id})
                 document_ref['_id'] = document_ref['_id'].__str__()
                 document[key] = document_ref
                 document[key] = self.get_values_db_ref(document[key])
