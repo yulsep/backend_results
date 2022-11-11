@@ -37,7 +37,7 @@ def table_insert():
     return jsonify(response), 201
 
 
-@table_blueprints.route('/table/update/<string:id_>', methods=['PATH'])
+@table_blueprints.route('/table/update/<string:id_>', methods=['PATCH'])
 def table_update(id_: str):
     """
     :param id_:
