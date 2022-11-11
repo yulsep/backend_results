@@ -54,7 +54,11 @@ class VoteController:
         return self.vote_repository.delete(id_)
 
     def table_assign(self, vote_id: str, table_id: str) -> dict:
-        vote = self.vote_repository.find_by_id(vote_id)
-        table = self.table_repository.find_by_id(table_id)
-        vote.table = table
-        return self.vote_repository.save(vote)
+        vote_dict = self.vote_repository.find_by_id(vote_id)
+        vote_obj = Table(vote_dict)
+        table_id_dict = self.table_repository.find_by_id(table_id)
+        table_id_obj = Table(table_id_dict)
+        vote_obj.table = table_id_obj
+        return self.vote_repository.save(vote_obj)
+
+
