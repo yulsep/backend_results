@@ -5,10 +5,10 @@ from repositories.political_party_repository import PoliticalPartyRepository
 class PoliticalPartyController:
     # constructor
     def __init__(self):
+        print("Political party controller ready")
         """
         Constructor of the class
         """
-        print("Political party controller ready")
         self.political_party_repository = PoliticalPartyRepository()
 
     def index(self) -> list:
@@ -16,7 +16,6 @@ class PoliticalPartyController:
         This method gets all political parties into the DB
         :return: political parties list
         """
-        print("Get all")
         return self.political_party_repository.find_all()
 
     def show(self, id_: str) -> dict:
@@ -25,7 +24,6 @@ class PoliticalPartyController:
         :param id_:
         :return:political party
         """
-        print("Show by id")
         return self.political_party_repository.find_by_id(id_)
 
     # INSERT political party
@@ -35,7 +33,6 @@ class PoliticalPartyController:
         :param political_party_:
         :return: political party´s dictionary
         """
-        print("Insert")
         political_party = PoliticalParty(political_party_)
         return self.political_party_repository.save(political_party)
 
@@ -47,7 +44,6 @@ class PoliticalPartyController:
         :param political_party_:
         :return: political party´s dictionary
         """
-        print("Update")
         political_party = PoliticalParty(political_party_)
         return self.political_party_repository.update(id_, political_party)
 
@@ -58,7 +54,6 @@ class PoliticalPartyController:
         :param id_: id of political party to delete
         :return: Nothing
         """
-        print("Delete" + id_)
         return self.political_party_repository.delete(id_)
 
 
