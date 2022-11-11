@@ -53,7 +53,7 @@ class CandidateController:
         return self.candidates_repository.delete(id_)
 
     """
-        Political party and candidate relationship
+        Political party and candidate relationship ----
     """
     def political_party_assign(self, candidate_id: str, political_party_id: str) -> dict:
         candidate_dict = self.candidates_repository.find_by_id(candidate_id)
