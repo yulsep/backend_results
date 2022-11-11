@@ -164,7 +164,7 @@ class InterfaceRepository(Generic[T]):
         for key in item_dict.keys():
             if item_dict.get(key).__str__().count("object") == 1:
                 object_ = self.object_to_db_ref(getattr(item, key))
-                set(item, key, object_)
+                setattr(item, key, object_)
         return item
 
     def object_to_db_ref(self, item_ref: T) -> DBRef:
