@@ -33,6 +33,12 @@ def vote_update(id_):
     return jsonify(response), 201
 
 
+@vote_blueprints.route("/vote/<string:vote_id>/table/<string:table_id>", methods=['PUT'])
+def assign_table(vote_id, table_id):
+    response = vote_controller.table_assign(vote_id, table_id)
+    return response, 201
+
+
 @vote_blueprints.route("/vote/delete/<string:id_>", methods=["DELETE"])
 def vote_delete(id_):
     response = vote_controller.delete(id_)

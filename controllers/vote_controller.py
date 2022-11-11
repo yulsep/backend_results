@@ -1,5 +1,7 @@
 from models.vote import Vote
+from models.table import Table
 from repositories.vote_repository import VoteRepository
+from repositories.table_repository import TableRepository
 
 
 class VoteController:
@@ -7,6 +9,7 @@ class VoteController:
     def __init__(self):
         print("Vote controller ready")
         self.vote_repository = VoteRepository()
+        self.table_repository = TableRepository()
 
     def index(self) -> list:
         """
@@ -49,3 +52,9 @@ class VoteController:
         :return:
         """
         return self.vote_repository.delete(id_)
+
+    def table_assign(self, vote_id: str, table_id: str) -> dict:
+        vote = self.vote_repository.find_by_id(vote_id)
+        table = self.table_repository.find_by_id(table_id)
+        vote.table = table
+        return self.vote_repository.save(vote)
