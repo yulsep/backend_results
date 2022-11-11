@@ -67,3 +67,4 @@ class CandidateController:
         political_party_obj = PoliticalParty(political_party_dict)
         candidate_obj.parties = political_party_obj
         return self.candidates_repository.save(candidate_obj)
+
