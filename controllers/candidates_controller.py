@@ -3,7 +3,7 @@ from repositories.candidates_repository import CandidatesRepository
 
 
 class CandidateController:
-    #constructor
+    # constructor
     def __init__(self):
         print("Candidate controller ready")
         self.candidates_repository = CandidatesRepository()
@@ -13,7 +13,6 @@ class CandidateController:
         This method get a candidate list
         :return:
         """
-        print("Get all")
         return self.candidates_repository.find_all()
 
     def show(self, id_: str) -> dict:
@@ -22,7 +21,6 @@ class CandidateController:
         :param id_:
         :return:
         """
-        print("Show by id")
         return self.candidates_repository.fin_by_id(id_)
 
     def create(self, candidate_: dict) -> dict:
@@ -31,7 +29,6 @@ class CandidateController:
         :param candidate_:
         :return:
         """
-        print("Insert")
         candidates = Candidates(candidate_)
         return self.candidates_repository.save(candidates)
 
@@ -42,7 +39,6 @@ class CandidateController:
         :param candidate_:
         :return:
         """
-        print("Update")
         candidate = Candidates(candidate_)
         return self.candidates_repository.update(id_, candidate)
 
@@ -52,5 +48,4 @@ class CandidateController:
         :param id_:
         :return:
         """
-        print("Delete" + id_)
         return self.candidates_repository.delete(id_)
