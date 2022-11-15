@@ -14,7 +14,7 @@ def get_all_candidates():
 
 
 @candidate_blueprints.route("/candidate/<string:id_>", methods=["GET"])
-def get_candidates_by_id(id_):
+def get_candidates_by_id(id_: str):
     response = candidate_controller.show(id_)
     return jsonify(response), 200
 

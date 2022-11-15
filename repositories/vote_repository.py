@@ -1,3 +1,5 @@
+from bson import ObjectId
+
 from models.vote import Vote
 from repositories.interface_repository import InterfaceRepository
 
