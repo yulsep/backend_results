@@ -1,5 +1,5 @@
 from flask import Blueprint
-from controllers.reports_controller import ReportController
+#from controllers.reports_controller import ReportController
 
 report_blueprints = Blueprint('report_blueprints', __name__)
 report_controller = ReportController()
