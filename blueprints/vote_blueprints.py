@@ -19,10 +19,10 @@ def get_votes_by_id(id_):
     return jsonify(response), 200
 
 
-@vote_blueprints.route("/vote/insert/candidate/<string:candidate_id>/table/<string:table_id>", methods=["POST"])
-def vote_insert(candidate_id, table_id):
+@vote_blueprints.route("/vote/table/<string:table_id>/candidate/<string:candidate_id>", methods=['POST'])
+def vote_insert(table_id, candidate_id):
     vote = request.get_json()
-    response = vote_controller.create(vote, candidate_id, table_id)
+    response = vote_controller.create(vote, table_id, candidate_id)
     return jsonify(response), 201
 
 
