@@ -113,7 +113,9 @@ class InterfaceRepository(Generic[T]):
 
     def get_values_db_ref(self, document: dict) -> dict:
         for key in document.keys():
+            print(key)
             value = document.get(key)
+            print(value)
             if isinstance(value, DBRef):
                 collection_ref = self.data_base[value.collection]
                 _id = ObjectId(value.id)

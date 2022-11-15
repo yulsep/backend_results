@@ -29,7 +29,7 @@ class VoteController:
         """
         return self.vote_repository.find_by_id(id_)
 
-    def create(self, vote_: dict, candidate_id: str, table_id: str) -> dict:
+    def create(self, vote_: dict, table_id: str, candidate_id: str) -> dict:
         """
 
         :param candidate_id:
