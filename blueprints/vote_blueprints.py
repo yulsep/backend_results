@@ -39,6 +39,7 @@ def assign_table(vote_id, table_id):
     return response, 201
 
 
+
 @vote_blueprints.route("/vote/delete/<string:id_>", methods=["DELETE"])
 def vote_delete(id_):
     response = vote_controller.delete(id_)

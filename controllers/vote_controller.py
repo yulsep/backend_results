@@ -1,8 +1,9 @@
 from models.vote import Vote
 from models.table import Table
+from models.candidates import Candidates
 from repositories.vote_repository import VoteRepository
 from repositories.table_repository import TableRepository
-
+from repositories.candidates_repository import CandidatesRepository
 
 class VoteController:
     # constructor
@@ -10,6 +11,7 @@ class VoteController:
         print("Vote controller ready")
         self.vote_repository = VoteRepository()
         self.table_repository = TableRepository()
+        self.candidates_repository = CandidatesRepository()
 
     def index(self) -> list:
         """
@@ -60,5 +62,6 @@ class VoteController:
         table_id_obj = Table(table_id_dict)
         vote_obj.table = table_id_obj
         return self.vote_repository.save(vote_obj)
+
 
 
