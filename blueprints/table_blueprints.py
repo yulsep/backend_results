@@ -58,4 +58,3 @@ def table_delete(id_: str):
     return jsonify(response), 204
 
 
-

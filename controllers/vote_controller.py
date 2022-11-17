@@ -44,6 +44,7 @@ class VoteController:
         table_obj = Table(table_dict)
         vote.candidate = candidate_obj
         vote.table = table_obj
+        vote = Vote(vote_)
         return self.vote_repository.save(vote)
 
     def update(self, id_: str, vote_: dict) -> dict:
@@ -63,3 +64,13 @@ class VoteController:
         :return:
         """
         return self.vote_repository.delete(id_)
+
+    "Gets all the votes of a candidate"
+
+    def get_by_candidate(self, candidate_id: str) -> list:
+        """
+
+        :param candidate_id:
+        :return:
+        """
+        return self.vote_repository.get_table_in_candidate(candidate_id)

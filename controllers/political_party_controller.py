@@ -56,4 +56,3 @@ class PoliticalPartyController:
         """
         return self.political_party_repository.delete(id_)
 
-

@@ -37,3 +37,9 @@ def vote_update(id_):
 def vote_delete(id_):
     response = vote_controller.delete(id_)
     return jsonify(response), 204
+
+
+@vote_blueprints.route("/vote/candidate/<string:candidate_id>", methods=['GET'])
+def get_vote_by_candidate(candidate_id):
+    response = vote_controller.get_by_candidate(candidate_id)
+    return response, 200
