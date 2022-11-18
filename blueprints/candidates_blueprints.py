@@ -14,8 +14,8 @@ def get_all_candidates():
 
 
 @candidate_blueprints.route("/candidate/<string:id_>", methods=["GET"])
-def get_candidates_by_id(id_):
-    response = candidate_controller.show()
+def get_candidates_by_id(id_: str):
+    response = candidate_controller.show(id_)
     return jsonify(response), 200
 
 
@@ -26,7 +26,13 @@ def candidate_insert():
     return jsonify(response), 201
 
 
-@candidate_blueprints.route("/candidate/update/<string:id_>", methods=["PATH"])
+@candidate_blueprints.route("/candidate/<string:candidate_id>/party/<string:political_party_id>", methods=["PUT"])
+def assign_parties(candidate_id, political_party_id):
+    response = candidate_controller.political_party_assign(candidate_id, political_party_id)
+    return response, 201
+
+
+@candidate_blueprints.route("/candidate/update/<string:id_>", methods=["PATCH"])
 def candidate_update(id_):
     candidate = request.get_json()
     response = candidate_controller.update(id_, candidate)

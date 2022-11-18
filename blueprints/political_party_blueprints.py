@@ -7,7 +7,7 @@ political_party_blueprints = Blueprint('political_party_controller', __name__)
 political_party_controller = PoliticalPartyController()
 
 
-@political_party_blueprints.route("/political_parties/all", methods=['GET'])
+@political_party_blueprints.route("/political_parties/all", methods=["GET"])
 def get_all_political_parties():
     response = political_party_controller.index()
     return jsonify(response), 200
