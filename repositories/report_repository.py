@@ -31,7 +31,7 @@ class ReportRepository(InterfaceRepository[Vote]):
         }
         query_add_fields = {
             '$addFields': {
-                'table_number': '$_id.table_number',
+                'table_number':  '$_id.table_number',
                 'registered_ids': '$_id.registered_ids',
                 '_id': '$_id._id'
             }
