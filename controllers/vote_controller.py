@@ -4,6 +4,7 @@ from models.candidates import Candidates
 from repositories.vote_repository import VoteRepository
 from repositories.table_repository import TableRepository
 from repositories.candidates_repository import CandidatesRepository
+from repositories.political_party_repository import PoliticalPartyRepository
 
 
 class VoteController:
@@ -13,6 +14,7 @@ class VoteController:
         self.vote_repository = VoteRepository()
         self.table_repository = TableRepository()
         self.candidate_repository = CandidatesRepository()
+        self.political_party_repository = PoliticalPartyRepository()
 
     def index(self) -> list:
         """
@@ -37,6 +39,7 @@ class VoteController:
         :param vote_:
         :return:
         """
+
         vote = Vote(vote_)
         candidate_dict = self.candidate_repository.find_by_id(candidate_id)
         candidate_obj = Candidates(candidate_dict)
@@ -44,7 +47,6 @@ class VoteController:
         table_obj = Table(table_dict)
         vote.candidate = candidate_obj
         vote.table = table_obj
-        vote = Vote(vote_)
         return self.vote_repository.save(vote)
 
     def update(self, id_: str, vote_: dict) -> dict:

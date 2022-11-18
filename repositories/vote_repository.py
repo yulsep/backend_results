@@ -13,3 +13,5 @@ class VoteRepository(InterfaceRepository[Vote]):
         """
         query = {"candidate.$id": ObjectId(candidate_id)}
         return self.query(query)
+
+

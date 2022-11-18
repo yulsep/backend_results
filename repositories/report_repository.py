@@ -17,3 +17,4 @@ class ReportRepository(InterfaceRepository[Vote]):
         }
         pipeline = [query_aggregation]
         return self.query_aggregation(pipeline)
+
