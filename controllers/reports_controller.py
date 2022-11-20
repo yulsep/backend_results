@@ -10,3 +10,6 @@ class ReportController:
 
     def get_votes_by_table(self):
         return self.report_repository.get_votes_by_table()
+
+    def get_votes_by_political_party(self):
+        return self.report_repository.get_votes_by_political_party()

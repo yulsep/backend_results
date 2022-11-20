@@ -19,12 +19,15 @@ def get_votes_by_table():
 
 @report_blueprints.route("/reports/votes_by_political_party", methods=['GET'])
 def get_votes_by_political_party():
-    pass
+    response = reports_controller.get_votes_by_political_party()
+    return response, 200
 
 
 @report_blueprints.route("/reports/percentage votes_parties", methods=['GET'])
 def get_political_party_percentage_votes():
     pass
+
+
 
 
 

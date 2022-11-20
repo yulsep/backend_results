@@ -44,6 +44,12 @@ class ReportRepository(InterfaceRepository[Vote]):
         pipeline = [query_lookup, query_unwind, query_group, query_add_fields, query_sort]
         return self.query_aggregation(pipeline)
 
-    def get_votes_for_political_party(self):
-        pass
+    def get_votes_by_political_party(self) -> list:
+        query_aggregation = {
+            '$addFields': {
+                "parties": "$_id.politicalparty",
 
+            }
+        }
+        pipeline = [query_aggregation]
+        return self.query_aggregation(pipeline)
