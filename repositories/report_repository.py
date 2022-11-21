@@ -1,22 +1,13 @@
+from bson import ObjectId
+
 from models.vote import Vote
 from repositories.interface_repository import InterfaceRepository
 
 
 class ReportRepository(InterfaceRepository[Vote]):
-    def get_votes_by_candidate(self) -> list:
-        query_aggregation = {
-            "$group": {
-                "_id": "$candidate",
-                "votes_by_candidate": {
-                    "$sum": 1
-                },
-                "doc": {
-                    "$first": "$$ROOT"
-                }
-            }
-        }
-        pipeline = [query_aggregation]
-        return self.query_aggregation(pipeline)
+    def get_votes_by_candidate(self, id_candidate):
+        theQuery = {"candidate.$id": ObjectId(id_candidate)}
+        return self.query(theQuery)
 
     def get_votes_by_table(self):
         query_lookup = {
@@ -40,7 +31,7 @@ class ReportRepository(InterfaceRepository[Vote]):
         }
         query_add_fields = {
             '$addFields': {
-                'table_number': '$_id.table_number',
+                'table_number':  '$_id.table_number',
                 'registered_ids': '$_id.registered_ids',
                 '_id': '$_id._id'
             }
@@ -53,5 +44,12 @@ class ReportRepository(InterfaceRepository[Vote]):
         pipeline = [query_lookup, query_unwind, query_group, query_add_fields, query_sort]
         return self.query_aggregation(pipeline)
 
-    def get_votes_for_political_party(self):
-        pass
+    def get_votes_by_political_party(self) -> list:
+        query_aggregation = {
+            '$addFields': {
+                "parties": "$_id.politicalparty",
+
+            }
+        }
+        pipeline = [query_aggregation]
+        return self.query_aggregation(pipeline)

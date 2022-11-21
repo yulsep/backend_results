@@ -67,12 +67,6 @@ class VoteController:
         """
         return self.vote_repository.delete(id_)
 
-    "Gets all the votes of a candidate"
 
-    def get_by_candidate(self, candidate_id: str) -> list:
-        """
 
-        :param candidate_id:
-        :return:
-        """
-        return self.vote_repository.get_table_in_candidate(candidate_id)
+
