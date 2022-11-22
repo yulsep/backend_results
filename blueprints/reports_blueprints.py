@@ -25,7 +25,7 @@ def get_votes_by_table():
     return response, 200
 
 
-@report_blueprints.route("/reports/votes_in_table/<string:table_id>",  methods=['GET'])
+@report_blueprints.route("/reports/votes_in_table/<string:table_id>", methods=['GET'])
 def get_votes_in_table(table_id):
     response = reports_controller.get_votes_in_table(table_id)
     return response, 200
@@ -45,6 +45,9 @@ def get_votes_in_political_party(political_party_id):
     return response, 200
 
 
-@report_blueprints.route("/reports/percentage votes_parties", methods=['GET'])
+@report_blueprints.route("/reports/percentage_votes_parties", methods=['GET'])
 def get_political_party_percentage_votes():
     pass
+
+
+
