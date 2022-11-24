@@ -91,91 +91,133 @@ class ReportRepository(InterfaceRepository[Vote]):
     # get reports by political party
 
     def get_votes_by_political_party(self) -> list:
-        query_aggregation = {
-            '$addFields': {
-                'max': {'$max': '$numero_votos'}
-            }
-        }
-        project = {
-            '$project': {
-                'candidate': 1,
-                'table': 1,
-                'max': 1
-            }
-        }
-        pipeline = [query_aggregation, project]
-        return self.query_aggregation(pipeline)
-
-    def get_political_party_percentage_votes(self):
-        group = {
-            '$group': {
-                '_id': 'candidates',
-                'sum-candidates': {
-                    '$sum': '$votes'
-                }
-            }
-        }
         lookup = {
             '$lookup': {
                 'from': 'candidates',
                 'localField': 'candidates.$id',
-                'foreignField': 'parties',
-                'as': 'details'
+                'foreignField': 'parties_id',
+                'as': 'candidates_info'
             }
+
         }
-        set = {
-            '$set': {
-                'details': {
-                    '$first': '$candidate'
+        unwind = {
+
+                '$unwind': '$candidates_info'
+
+        }
+        group = {
+
+                '$group': {
+                    '_id': '$candidates_info',
+                    'count': {
+                        '$sum': 1
+                    }
                 }
             }
-        }
-        lookup1 = {
+
+        add_fields = {
+
+                '$addFields': {
+                    'politicalparty': '$_id.parties'
+                }
+            }
+
+        lookup_one = {
+
+                '$lookup': {
+                    'from': 'politicalparty',
+                    'localField': 'parties.$id',
+                    'foreignField': 'parties_id',
+                    'as': 'parties_info'
+                }
+            }
+
+        unwind_one = {
+
+                '$unwind': '$parties_info'
+            }
+
+        group_one = {
+
+                '$group': {
+                    '_id': '$parties_info',
+                    'votes': {
+                        '$sum': '$count'
+                    }
+                }
+            }
+
+        add_fields_one = {
+
+                '$addFields': {
+                    'name': '$_id.name',
+                    'motto': '$_id.motto',
+                    '_id': '$_id._id'
+                }
+            }
+
+        pipeline = [lookup, unwind, group, add_fields, lookup_one, unwind_one, group_one, add_fields_one]
+        return self.query_aggregation(pipeline)
+
+    def get_political_party_percentage_votes(self):
+        position = 15
+        lookup = {
             '$lookup': {
-                'from': 'politicalparty',
-                'localField': 'candidates.politicalparty.$id',
-                'foreignField': '_id',
-                'as': 'political_party'
+                'from': 'candidates',
+                'localField': 'candidates.$id',
+                'foreignField': 'parties_id',
+                'as': 'candidates_info'
             }
         }
-        set1 = {
-            '$set': {
-                'political_parys': {
-                    '$first': '$politicalparty'
+        unwind = {
+            '$unwind': '$candidates_info'
+        }
+        group = {
+            '$group': {
+                '_id': '$candidates_info',
+                'count': {
+                    '$sum': 1
                 }
             }
         }
         sort = {
             '$sort': {
-                'sum-candidates': -1
+                'votes': -1
             }
         }
         limit = {
-            '$limit': 15
-        }
-        group1 = {
-            '$group': {
-                '_id': '$politicalparty',
-                'candidates_for_parties': {
-                    '$count': {}
-                }
-            }
+            "$limit": position,
         }
         add_fields = {
             '$addFields': {
-                'porcentaje': {
-                    '$sum': [
-                        {
-                            '$sum': [
-                                '$candidates_for_parties', 15
-                            ]
-                        }, 100
-                    ]
+                'politicalparty': '$_id.politicalparty'
+            }
+        }
+        lookup_one = {
+            '$lookup': {
+                'from': 'politicalparty',
+                'localField': 'parties.$id',
+                'foreignField': 'candidates_id',
+                'as': 'parties_info'
+            }
+        }
+        unwind_one = {
+            '$unwind': '$parties_info'
+        }
+        group_one = {
+            '$group': {
+                '_id': '$parties_info',
+                'votes': {
+                    '$sum': '$count'
                 }
             }
         }
-        pipeline = [group, lookup, set, lookup1, set1, sort, limit, group1, add_fields]
+        add_fields_one = {
+            '$addFields': {
+                'name': '$_id.name',
+                'motto': '$_id.motto',
+                '_id': '$_id._id'
+            }
+        }
+        pipeline = [lookup, unwind, group, sort, limit, add_fields, lookup_one, unwind_one, group_one, add_fields_one]
         return self.query_aggregation(pipeline)
-
-
-
