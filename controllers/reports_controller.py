@@ -23,9 +23,5 @@ class ReportController:
     def get_votes_by_political_party(self):
         return self.report_repository.get_votes_by_political_party()
 
-    def get_votes_in_political_party(self, political_party_id):
-        return self.report_repository.get_votes_in_political_party(political_party_id)
-
     def get_political_party_percentage_votes(self):
-        pass
-
+        return self.report_repository.get_political_party_percentage_votes()
