@@ -6,15 +6,15 @@ reports_controller = ReportController()
 
 
 # get reports by candidates
-@report_blueprints.route("/reports/votes_by_candidates/<string:id_candidate>", methods=['GET'])
-def get_votes_by_candidates(id_candidate):
-    response = reports_controller.get_votes_by_candidate(id_candidate)
+@report_blueprints.route("/reports/votes_in_candidates/<string:id_candidate>", methods=['GET'])
+def get_votes_in_candidates(id_candidate):
+    response = reports_controller.get_votes_in_candidate(id_candidate)
     return response, 200
 
 
-@report_blueprints.route("/reports/votes_in_candidates", methods=['GET'])
-def get_votes_in_candidates():
-    response = reports_controller.get_votes_in_candidate()
+@report_blueprints.route("/reports/votes_by_candidates", methods=['GET'])
+def get_votes_by_candidates():
+    response = reports_controller.get_votes_by_candidate()
     return response, 200
 
 

@@ -7,11 +7,11 @@ from repositories.interface_repository import InterfaceRepository
 class ReportRepository(InterfaceRepository[Vote]):
 
     # get reports by candidates
-    def get_votes_by_candidate(self, id_candidate):
+    def get_votes_in_candidate(self, id_candidate):
         theQuery = {"candidate.$id": ObjectId(id_candidate)}
         return self.query(theQuery)
 
-    def get_vote_in_candidate(self):
+    def get_vote_by_candidate(self):
         query_aggregation = {
             '$addFields': {
                 'max': {'$max': '$numero_votos'}
