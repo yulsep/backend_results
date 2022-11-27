@@ -1,5 +1,6 @@
 from models.political_party import PoliticalParty
 from repositories.political_party_repository import PoliticalPartyRepository
+from repositories.vote_repository import Vote
 
 
 class PoliticalPartyController:
@@ -50,9 +51,11 @@ class PoliticalPartyController:
     # DELETE one political party
     def delete(self, id_: str) -> str:
         """
-        This Method  delete a Political Party by ID
+        This Method  deletes a Political Party by ID
         :param id_: id of political party to delete
         :return: Nothing
         """
         return self.political_party_repository.delete(id_)
+
+
 
