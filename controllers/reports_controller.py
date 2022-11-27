@@ -6,11 +6,11 @@ class ReportController:
         self.report_repository = ReportRepository()
 
     # get reports by candidates
-    def get_votes_by_candidate(self, id_candidate):
-        return self.report_repository.get_votes_by_candidate(id_candidate)
+    def get_votes_in_candidate(self, id_candidate):
+        return self.report_repository.get_votes_in_candidate(id_candidate)
 
-    def get_votes_in_candidate(self):
-        return self.report_repository.get_vote_in_candidate()
+    def get_votes_by_candidate(self):
+        return self.report_repository.get_vote_by_candidate()
 
     # get reports by tables
     def get_votes_by_table(self):
