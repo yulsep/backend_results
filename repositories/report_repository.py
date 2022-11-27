@@ -21,10 +21,9 @@ class ReportRepository(InterfaceRepository[Vote]):
         project = {
             '$project': {
                 'table_number': 1,
-                'numero_votos': 1,
+                'votos_registrados': 1,
                 'candidate': 1,
                 'table': 1,
-                'max': 1
             }
         }
         pipeline = [query_aggregation, project]
@@ -55,7 +54,7 @@ class ReportRepository(InterfaceRepository[Vote]):
         query_add_fields = {
             '$addFields': {
                 'table_number': '$_id.table_number',
-                'registered_ids': '$_id.registered_ids',
+                'votos_registrados': '$_id.votos_registrados',
                 '_id': '$_id._id'
             }
         }
@@ -68,25 +67,9 @@ class ReportRepository(InterfaceRepository[Vote]):
         return self.query_aggregation(pipeline)
 
     def get_votes_in_table(self, table_id: str):
-        query1 = {
-            "$match": {"table.$id": ObjectId(table_id)}
-        }
-        query_aggregation = {
-            '$addFields': {
-                'max': {'$max': '$numero_votos'}
+        theQuery = {"table.$id": ObjectId(table_id)}
+        return self.query(theQuery)
 
-            }
-        }
-        project = {
-            '$project': {
-                'numero_votos': 1,
-                'table': 1,
-                'max': 1
-            }
-        }
-
-        pipeline = [query1, query_aggregation, project]
-        return self.query_aggregation(pipeline)
 
     # get reports by political party
 
@@ -118,7 +101,7 @@ class ReportRepository(InterfaceRepository[Vote]):
         add_fields = {
 
                 '$addFields': {
-                    'politicalparty': '$_id.parties'
+                    'politicalparty': '$_id.parties',
                 }
             }
 
